@@ -13,19 +13,20 @@ public class SidebarPage extends PageObject {
     private By allItemsOption = By.id("inventory_sidebar_link");
     private By aboutOption = By.id("about_sidebar_link");
     private By inventoryContainer = By.id("inventory_container");
+    private By errorMessage = By.tagName("body");
 
     // Open SauceDemo URL
     public void openSauceDemo() {
         openUrl("https://www.saucedemo.com");
-        waitABit(1000);  // Delay after opening the page
+        waitABit(1000);
     }
 
     // Enter username and password
     public void enterCredentials(String username, String password) {
         $(usernameField).type(username);
-        waitABit(1000);  // Delay after entering the username
+        waitABit(1000);
         $(passwordField).type(password);
-        waitABit(1000);  // Delay after entering the password
+        waitABit(1000);
     }
 
     // Click the login button
@@ -40,7 +41,7 @@ public class SidebarPage extends PageObject {
         waitABit(1000);
     }
 
-    // Select the sidebar option (All Items, About, Logout)
+    // Select the sidebar option (All Items, About and Logout)
     public void selectSidebarOption(String option) {
         switch (option.toLowerCase()) {
             case "all items":
@@ -77,8 +78,6 @@ public class SidebarPage extends PageObject {
     public boolean isInventoryPageDisplayed() {
         return $(inventoryContainer).isDisplayed();
     }
-
-    private By errorMessage = By.tagName("body"); // Adjust to locate the 404 error text or element
 
     public boolean is404ErrorDisplayed() {
         // Check if the page content contains "404" or a similar indicator

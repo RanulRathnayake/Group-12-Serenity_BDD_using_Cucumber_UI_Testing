@@ -41,14 +41,13 @@ public class SidebarStepDefinitions {
 
     @Then("the user should see the inventory page")
     public void the_user_should_see_the_inventory_page() {
-        // Check the current URL
+        // Check the current URL to see if it contains inventory.html
         String actualUrl = sidebarActions.getCurrentUrl();
         Assert.assertTrue("User was not navigated to the inventory page!", actualUrl.contains("inventory.html"));
 
-        // Alternatively, verify the presence of an element that is unique to the inventory page, such as a product list.
+        // Alternatively, check if a product list is visible
         boolean isInventoryPage = sidebarActions.isInventoryPageDisplayed();
-        Assert.assertTrue("Inventory page content is not displayed!", isInventoryPage);
-    }
+        Assert.assertTrue("Inventory page content is not displayed!", isInventoryPage);    }
 
     @Then("the user should be logged out")
     public void the_user_should_be_logged_out() {
