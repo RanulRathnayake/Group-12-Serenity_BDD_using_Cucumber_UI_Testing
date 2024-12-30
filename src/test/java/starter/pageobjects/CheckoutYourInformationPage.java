@@ -24,41 +24,41 @@ public class CheckoutYourInformationPage extends PageObject {
 
     public void enterFirstName(String firstName) {
         firstNameField.type(firstName);
-        waitABit(1000);  // Delay after entering the first name
+        waitABit(1000);
     }
 
     public void enterLastName(String lastName) {
         lastNameField.type(lastName);
-        waitABit(1000);  // Delay after entering the last name
+        waitABit(1000);
     }
 
     public void enterPostalCode(String postalCode) {
         postalCodeField.type(postalCode);
-        waitABit(1000);  // Delay after entering the postal code
+        waitABit(1000);
     }
 
     public void clearFirstName() {
         firstNameField.clear();
-        waitABit(1000);  // Delay after clearing the first name
+        waitABit(1000);
     }
 
     public void clearLastName() {
         lastNameField.clear();
-        waitABit(1000);  // Delay after clearing the last name
+        waitABit(1000);
     }
 
     public void clearPostalCode() {
         postalCodeField.clear();
-        waitABit(1000);  // Delay after clearing the postal code
+        waitABit(1000);
     }
 
     public void clickContinueButton() {
         continueButton.click();
-        waitABit(1000);  // Delay after clicking continue
+        waitABit(1000);
     }
 
     public void waitForPageToLoad() {
-        waitABit(5000);  // Wait for 5 seconds to ensure the page loads completely
+        waitABit(5000);
     }
 
     public String getErrorMessage() {
