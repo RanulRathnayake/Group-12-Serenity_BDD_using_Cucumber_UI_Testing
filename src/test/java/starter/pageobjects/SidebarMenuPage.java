@@ -3,7 +3,7 @@ package starter.pageobjects;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 
-public class SidebarPage extends PageObject {
+public class SidebarMenuPage extends PageObject {
 
     private By usernameField = By.id("user-name");
     private By passwordField = By.id("password");
@@ -15,16 +15,16 @@ public class SidebarPage extends PageObject {
     private By inventoryContainer = By.id("inventory_container");
     private By errorMessage = By.tagName("body");
 
-    public void openSauceDemo() {
-        openUrl("https://www.saucedemo.com");
-    }
+    public void openSauceDemo() {openUrl("https://www.saucedemo.com");}
 
     public void enterUsername(String username) {
         $(usernameField).type(username);
+        waitABit(1000);
     }
 
     public void enterPassword(String password) {
         $(passwordField).type(password);
+        waitABit(1000);
     }
 
     public void clickButton(String button) {
@@ -35,31 +35,34 @@ public class SidebarPage extends PageObject {
             default:
                 throw new IllegalArgumentException("Invalid button: " + button);
         }
+        waitABit(1500);
     }
 
     public void openSidebar() {
         $(sidebarButton).click();
+        waitABit(1500);
     }
 
     public void selectSidebarOption(String option) {
         switch (option.toLowerCase()) {
             case "all items":
                 $(allItemsOption).click();
+                waitABit(1000);
                 break;
             case "about":
                 $(aboutOption).click();
+                waitABit(1000);
                 break;
             case "logout":
                 $(logoutOption).click();
+                waitABit(1000);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid sidebar option: " + option);
         }
     }
 
-    public String getCurrentUrl() {
-        return getDriver().getCurrentUrl();
-    }
+    public String getCurrentUrl() {return getDriver().getCurrentUrl();}
 
     public boolean isInventoryPageDisplayed() {
         return $(inventoryContainer).isDisplayed();

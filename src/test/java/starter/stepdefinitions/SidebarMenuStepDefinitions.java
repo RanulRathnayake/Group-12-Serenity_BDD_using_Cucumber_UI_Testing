@@ -1,16 +1,16 @@
 package starter.stepdefinitions;
 
 import net.serenitybdd.annotations.Steps;
-import starter.actions.SidebarActions;
+import starter.actions.SidebarMenuActions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
-public class SidebarStepDefinitions {
+public class SidebarMenuStepDefinitions {
 
     @Steps
-    SidebarActions sidebarActions;
+    SidebarMenuActions sidebarActions;
 
     @Given("the user navigates to the SauceDemo login page")
     public void the_user_navigates_to_the_sauce_demo_login_page() {

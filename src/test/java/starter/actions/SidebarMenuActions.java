@@ -1,11 +1,11 @@
 package starter.actions;
 
 import net.serenitybdd.annotations.Step;
-import starter.pageobjects.SidebarPage;
+import starter.pageobjects.SidebarMenuPage;
 
-public class SidebarActions {
+public class SidebarMenuActions {
 
-    private SidebarPage sidebarPage;
+    private SidebarMenuPage sidebarPage;
 
     @Step("Navigate to SauceDemo login page")
     public void navigateToLoginPage() {
