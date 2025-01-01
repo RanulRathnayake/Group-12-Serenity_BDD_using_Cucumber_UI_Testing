@@ -5,12 +5,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.annotations.Steps;
 import org.junit.Assert;
-import starter.actions.product_catalogAction;
+import starter.actions.ProductCatalogAction;
 
 public class ProductCatalogStepDefinitions {
 
     @Steps
-    product_catalogAction productCatalogAction;
+    ProductCatalogAction productCatalogAction;
 
     @Given("the user navigates to the SauceDemo login page")
     public void the_user_navigates_to_the_sauce_demo_login_page() {
@@ -43,15 +43,19 @@ public class ProductCatalogStepDefinitions {
                 productCatalogAction.isProductSortingCorrect(sortType));
     }
 
-    @Then("the product at position {int} should have name {string}")
-    public void verifyProductNameAtPosition(int position, String expectedName) {
-        Assert.assertEquals("Product name doesn't match!",
-                expectedName, productCatalogAction.getProductNameAtPosition(position));
+    @Then("the first product should match the {string} sorting")
+    public void verifyFirstProductAfterSorting(String sortType) {
+        String expectedProduct = productCatalogAction.getExpectedFirstProduct(sortType);
+        String actualProduct = productCatalogAction.getProductNameAtPosition(1);
+        Assert.assertEquals("First product doesn't match expected sorting order!",
+                expectedProduct, actualProduct);
     }
 
-    @Then("the product at position {int} should have price {string}")
-    public void verifyProductPriceAtPosition(int position, String expectedPrice) {
-        Assert.assertEquals("Product price doesn't match!",
-                expectedPrice, productCatalogAction.getProductPriceAtPosition(position));
+    @Then("the first price should match the {string} sorting")
+    public void verifyFirstPriceAfterSorting(String sortType) {
+        String expectedPrice = productCatalogAction.getExpectedFirstPrice(sortType);
+        String actualPrice = productCatalogAction.getProductPriceAtPosition(1);
+        Assert.assertEquals("First price doesn't match expected sorting order!",
+                expectedPrice, actualPrice);
     }
 }

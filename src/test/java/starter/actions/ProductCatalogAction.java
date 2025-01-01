@@ -3,7 +3,7 @@ package starter.actions;
 import net.serenitybdd.annotations.Step;
 import starter.pageobjects.ProductCatalogPage;
 
-public class product_catalogAction {
+public class ProductCatalogAction {
     private ProductCatalogPage productCatalogPage;
 
     @Step("Navigate to login page")
@@ -41,9 +41,19 @@ public class product_catalogAction {
         return productCatalogPage.getProductPriceAtPosition(position);
     }
 
-    @Step("Verify product sorting")
+    @Step("Verify product sorting {0}")
     public boolean isProductSortingCorrect(String sortType) {
         return productCatalogPage.verifyProductSorting(sortType);
+    }
+
+    @Step("Get expected first product after sorting by {0}")
+    public String getExpectedFirstProduct(String sortType) {
+        return productCatalogPage.getExpectedFirstProduct(sortType);
+    }
+
+    @Step("Get expected first price after sorting by {0}")
+    public String getExpectedFirstPrice(String sortType) {
+        return productCatalogPage.getExpectedFirstPrice(sortType);
     }
 
     @Step("Get number of products displayed")
