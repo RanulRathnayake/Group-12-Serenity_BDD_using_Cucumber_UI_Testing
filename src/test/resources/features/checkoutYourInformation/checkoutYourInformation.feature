@@ -6,7 +6,7 @@ Feature: Login and Checkout Information Validation
     And the user clicks the login button
     Then the user should be successfully logged in
     And the user navigates to the checkout page
-    When the user enters valid "First Name", "Last Name", and "Postal Code"
+    When the user enters valid "John", "Doe", and "12345"
     Then the user should successfully proceed to the next step
 
   Scenario: Display error when the first name field is empty
@@ -15,7 +15,7 @@ Feature: Login and Checkout Information Validation
     And the user clicks the login button
     Then the user should be successfully logged in
     And the user navigates to the checkout page
-    When the user leaves the "First Name" field empty and enters "Last Name" and "Postal Code"
+    When the user leaves the "John" field empty and enters "Doe" and "12345"
     And the user clicks the continue button
     Then an error message "Error: First Name is required" should be displayed
 
@@ -25,6 +25,6 @@ Feature: Login and Checkout Information Validation
     And the user clicks the login button
     Then the user should be successfully logged in
     And the user navigates to the checkout page
-    When the user leaves the Last Name field empty and enters "First Name" and "Postal Code"
+    When the user leaves the Last Name field empty and enters "John" and "12345"
     And the user clicks the continue button
     Then an error message "Error: Last Name is required" should be displayed

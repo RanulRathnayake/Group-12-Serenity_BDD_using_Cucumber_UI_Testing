@@ -1,73 +1,86 @@
 package starter.pageobjects;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CheckoutYourInformationPage extends PageObject {
 
+    @FindBy(id = "user-name")
+    private WebElementFacade usernameField;
+
+    @FindBy(id = "password")
+    private WebElementFacade passwordField;
+
+    @FindBy(id = "login-button")
+    private WebElementFacade loginButton;
+
+    @FindBy(className = "inventory_list")
+    private WebElementFacade productPage;
+
+    @FindBy(id = "shopping_cart_container")
+    private WebElementFacade cartButton;
+
+    @FindBy(id = "checkout")
+    private WebElementFacade checkoutButton;
+
     @FindBy(id = "first-name")
-    WebElementFacade firstNameField;
+    private WebElementFacade firstNameField;
 
     @FindBy(id = "last-name")
-    WebElementFacade lastNameField;
+    private WebElementFacade lastNameField;
 
     @FindBy(id = "postal-code")
-    WebElementFacade postalCodeField;
+    private WebElementFacade postalCodeField;
 
     @FindBy(id = "continue")
-    public WebElement continueButton;
+    private WebElementFacade continueButton;
 
-    @FindBy(css = "span[data-test='title']") // Checkout: Overview title
-    WebElementFacade checkoutOverviewTitle;
+    @FindBy(className = "error-message-container")
+    private WebElementFacade errorMessageContainer;
 
-    public void enterFirstName(String firstName) {
+    public void openSauceDemo() {
+        openUrl("https://www.saucedemo.com/");
+    }
+
+    public void enterUsername(String username) {
+        usernameField.type(username);
+    }
+
+    public void enterPassword(String password) {
+        passwordField.type(password);
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public boolean isUserLoggedIn() {
+        return productPage.isDisplayed();
+    }
+
+    public void navigateToCartAndCheckout() {
+        cartButton.click();
+        checkoutButton.click();
+    }
+
+    public void fillUserDetails(String firstName, String lastName, String postalCode) {
         firstNameField.type(firstName);
-        waitABit(1000);
-    }
-
-    public void enterLastName(String lastName) {
         lastNameField.type(lastName);
-        waitABit(1000);
-    }
-
-    public void enterPostalCode(String postalCode) {
         postalCodeField.type(postalCode);
-        waitABit(1000);
     }
 
-    public void clearFirstName() {
-        firstNameField.clear();
-        waitABit(1000);
-    }
-
-    public void clearLastName() {
-        lastNameField.clear();
-        waitABit(1000);
-    }
-
-    public void clearPostalCode() {
-        postalCodeField.clear();
-        waitABit(1000);
-    }
-
-    public void clickContinueButton() {
+    public void clickContinue() {
         continueButton.click();
-        waitABit(1000);
+    }
+    public boolean isNextPageDisplayed() {
+        WebElementFacade continueButtonElement = find(By.id("continue"));
+        return continueButtonElement.isDisplayed();
     }
 
-    public void waitForPageToLoad() {
-        waitABit(5000);
-    }
 
     public String getErrorMessage() {
-        return errorMessage.getText();
+        return errorMessageContainer.getText();
     }
-
-    public boolean isNextPageLoaded() {
-        return checkoutOverviewTitle.isPresent();
-    }
-    @FindBy(className = "error-message-container")
-    public WebElement errorMessage;
 }

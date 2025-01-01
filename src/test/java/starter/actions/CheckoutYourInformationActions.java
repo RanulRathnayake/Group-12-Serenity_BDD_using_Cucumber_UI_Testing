@@ -1,92 +1,54 @@
 package starter.actions;
 
-import net.serenitybdd.core.pages.PageObject;
-import net.serenitybdd.core.annotations.findby.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import net.serenitybdd.annotations.Step;
 import starter.pageobjects.CheckoutYourInformationPage;
 
-import java.time.Duration;
+public class CheckoutYourInformationActions {
 
-public class CheckoutYourInformationActions extends PageObject {
+    private CheckoutYourInformationPage checkoutPage;
 
-    CheckoutYourInformationPage checkoutPage;
-    // Open the Sauce Demo login page
+    @Step("Open the Sauce Demo login page")
     public void openLoginPage() {
-        openUrl("https://www.saucedemo.com/");
-        waitABit(2000);
+        checkoutPage.openSauceDemo();
     }
 
-    // Enter the username and password for login
+    @Step("Enter username: {0} and password: {1}")
     public void enterLoginCredentials(String username, String password) {
-        WebElement usernameField = find(By.id("user-name"));
-        WebElement passwordField = find(By.id("password"));
-        usernameField.sendKeys(username);
-        passwordField.sendKeys(password);
-        waitABit(1000);
+        checkoutPage.enterUsername(username);
+        checkoutPage.enterPassword(password);
     }
 
-    // Click the login button
+    @Step("Click the login button")
     public void clickLoginButton() {
-        find(By.id("login-button")).click();
-        waitABit(2000);
+        checkoutPage.clickLoginButton();
     }
 
-    // Check if the user has logged in successfully
+    @Step("Verify the user is logged in")
     public boolean isLoggedIn() {
-        WebElement productPage = find(By.className("inventory_list"));
-        return productPage.isDisplayed();
+        return checkoutPage.isUserLoggedIn();
     }
 
-    // Open the checkout page: click on cart and then checkout button
+    @Step("Navigate to the checkout page")
     public void openCheckoutPage() {
-        find(By.id("shopping_cart_container")).click();
-        waitABit(1000);
-        find(By.id("checkout")).click();
-        waitABit(2000);
+        checkoutPage.navigateToCartAndCheckout();
     }
 
-
-
-    // Enter user details like First Name, Last Name, and Postal Code on the checkout page
+    @Step("Enter user details: First Name: {0}, Last Name: {1}, Postal Code: {2}")
     public void enterUserDetails(String firstName, String lastName, String postalCode) {
-        // Wait for the "first-name" field to be visible before interacting with it
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
-        WebElement firstNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("first-name")));
-        firstNameField.clear();
-        firstNameField.sendKeys(firstName);
-        System.out.println("Entered First Name: " + firstName);
-        waitABit(1000);
-
-        // Wait for the "last-name" field to be visible before interacting with it
-        WebElement lastNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("last-name")));
-        lastNameField.clear();
-        lastNameField.sendKeys(lastName);
-        System.out.println("Entered Last Name: " + lastName);
-        waitABit(1000);
-
-        // Wait for the "postal-code" field to be visible before interacting with it
-        WebElement postalCodeField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("postal-code")));
-        postalCodeField.clear();
-        postalCodeField.sendKeys(postalCode);
-        System.out.println("Entered Postal Code: " + postalCode);
-        waitABit(1000);
-
-        // Click the continue button to proceed to the next step
-        WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("continue")));
-        continueButton.click();
-        waitABit(2000);
+        checkoutPage.fillUserDetails(firstName, lastName, postalCode);
     }
 
+    @Step("Click the continue button")
     public void clickContinueButton() {
-        checkoutPage.continueButton.click();
+        checkoutPage.clickContinue();
+    }
+    @Step("Verify the next page is loaded")
+    public boolean isNextPageLoaded() {
+        return checkoutPage.isNextPageDisplayed();
     }
 
+    @Step("Get error message displayed on the page")
     public String getErrorMessage() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("error-message-container")));
-        return errorElement.getText();
+        return checkoutPage.getErrorMessage();
     }
-
 }
