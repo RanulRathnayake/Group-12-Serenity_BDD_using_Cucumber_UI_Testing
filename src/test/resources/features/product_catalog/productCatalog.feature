@@ -11,6 +11,14 @@ Feature: Product Catalog and Filtering
     Then the products should be sorted by "Name (Z to A)"
     And the first product should match the "Name (Z to A)" sorting
 
+  Scenario: Sort products by name from Z to A
+    Given the user enters "problem_user" as the username
+    And the user enters "secret_sauce" as the password
+    When the user clicks on the "Login" button
+    When the user sorts the products by "Name (Z to A)"
+    Then the products should be sorted by "Name (Z to A)"
+    And the first product should match the "Name (Z to A)" sorting
+
   Scenario: Sort products by name from A to Z
     Given the user enters "standard_user" as the username
     And the user enters "secret_sauce" as the password
