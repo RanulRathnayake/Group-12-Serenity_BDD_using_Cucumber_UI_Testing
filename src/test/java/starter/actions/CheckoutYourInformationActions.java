@@ -38,6 +38,11 @@ public class CheckoutYourInformationActions {
         checkoutPage.fillUserDetails(firstName, lastName, postalCode);
     }
 
+    @Step("Attempt to enter last name: {0}")
+    public boolean isLastNameFieldEditable(String lastName) {
+        return checkoutPage.tryToEnterLastName(lastName);
+    }
+
     @Step("Click the continue button")
     public void clickContinueButton() {
         checkoutPage.clickContinue();
@@ -51,4 +56,5 @@ public class CheckoutYourInformationActions {
     public String getErrorMessage() {
         return checkoutPage.getErrorMessage();
     }
+
 }

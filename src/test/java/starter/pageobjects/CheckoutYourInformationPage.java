@@ -1,6 +1,7 @@
 package starter.pageobjects;
 
 import net.serenitybdd.core.annotations.findby.By;
+import net.serenitybdd.core.exceptions.NoSuchElementException;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.support.FindBy;
@@ -78,9 +79,18 @@ public class CheckoutYourInformationPage extends PageObject {
         WebElementFacade continueButtonElement = find(By.id("continue"));
         return continueButtonElement.isDisplayed();
     }
-
+    public boolean tryToEnterLastName(String lastName) {
+        try {
+            lastNameField.type(lastName);
+            return lastNameField.getValue().equals(lastName);
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
     public String getErrorMessage() {
         return errorMessageContainer.getText();
     }
+
+
 }
