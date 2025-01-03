@@ -19,7 +19,6 @@ Feature: Checkout Information Validation
     And the user clicks the continue button
     Then an error message "Error: First Name is required" should be displayed
 
-
   Scenario: Verify the Last Name field is editable
     Given the user is on the Sauce Demo login page - checkout
     When the user enters "error_user" as username and "secret_sauce" as password - checkout
