@@ -1,6 +1,6 @@
 Technologies : Serenity BDD with Cucumber
 
-Group Members
+Group 12: Group Members
 
 1. 204181M - Rathnayake R. G
 2. 205047R - Kalyanapriya K.B.V.T.R.
