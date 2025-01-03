@@ -25,5 +25,6 @@ Feature: Checkout Information Validation
     When the user enters "error_user" as username and "secret_sauce" as password - checkout
     And the user clicks the login button - checkout
     And the user navigates to the checkout page
-    When the user tries to enter "Doe" in the Last Name field
-    Then the test case should fail with a bug report stating "The Last Name field is not editable"
+    Then the Last Name field should be editable
+    When the user enters "Doe" in the Last Name field
+    Then the Last Name field should accept the value "Doe"

@@ -87,10 +87,19 @@ public class CheckoutYourInformationPage extends PageObject {
             return false;
         }
     }
+    public String getLastNameValue() {
+        return lastNameField.getAttribute("value");
+    }
 
+    public boolean isLastNameFieldEditable() {
+        return lastNameField.isEnabled();
+    }
+
+    public void enterLastName(String lastName) {
+        lastNameField.sendKeys(lastName);
+    }
     public String getErrorMessage() {
         return errorMessageContainer.getText();
     }
-
 
 }

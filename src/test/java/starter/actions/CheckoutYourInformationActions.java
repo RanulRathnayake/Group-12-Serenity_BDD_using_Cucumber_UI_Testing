@@ -38,15 +38,27 @@ public class CheckoutYourInformationActions {
         checkoutPage.fillUserDetails(firstName, lastName, postalCode);
     }
 
-    @Step("Attempt to enter last name: {0}")
-    public boolean isLastNameFieldEditable(String lastName) {
-        return checkoutPage.tryToEnterLastName(lastName);
+    @Step("Check if the Last Name field is editable")
+    public boolean isLastNameFieldEditable() {
+        return checkoutPage.isLastNameFieldEditable();
+    }
+
+
+    @Step("Enter the Last Name: {0}")
+    public void enterLastName(String lastName) {
+        checkoutPage.enterLastName(lastName);
+    }
+
+    @Step("Get the value entered in the Last Name field")
+    public String getLastNameValue() {
+        return checkoutPage.getLastNameValue();
     }
 
     @Step("Click the continue button")
     public void clickContinueButton() {
         checkoutPage.clickContinue();
     }
+
     @Step("Verify the next page is loaded")
     public boolean isNextPageLoaded() {
         return checkoutPage.isNextPageDisplayed();
@@ -56,5 +68,4 @@ public class CheckoutYourInformationActions {
     public String getErrorMessage() {
         return checkoutPage.getErrorMessage();
     }
-
 }

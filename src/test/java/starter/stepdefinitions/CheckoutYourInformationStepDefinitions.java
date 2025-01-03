@@ -2,11 +2,7 @@ package starter.stepdefinitions;
 
 import io.cucumber.java.en.*;
 import net.serenitybdd.annotations.Steps;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.core.pages.WebElementFacade;
 import starter.actions.CheckoutYourInformationActions;
-
-import static java.nio.file.Files.find;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 
@@ -73,12 +69,6 @@ public class CheckoutYourInformationStepDefinitions {
         waitFor(2);
     }
 
-    @When("the user leaves the Last Name field empty and enters {string} and {string}")
-    public void userLeavesLastNameEmpty(String firstName, String postalCode) {
-        checkoutActions.enterUserDetails(firstName, "", postalCode);
-        waitFor(2);
-    }
-
     @And("the user clicks the continue button")
     public void userClicksContinueButton() {
         checkoutActions.clickContinueButton();
@@ -93,19 +83,29 @@ public class CheckoutYourInformationStepDefinitions {
         waitFor(2);
     }
 
-    @When("the user tries to enter {string} in the Last Name field")
-    public void theUserTriesToEnterInTheLastNameField(String lastName) {
-        boolean isEditable = checkoutActions.isLastNameFieldEditable(lastName);
-        assertFalse("Bug detected: The Last Name field should be editable but it is not.", isEditable);
+    @Then("the Last Name field should be editable")
+    public void theLastNameFieldShouldBeEditable() {
+        String lastName = "Doe";
+        boolean isEditable = checkoutActions.isLastNameFieldEditable();
+        assertThat(isEditable)
+                .as("The Last Name field should be editable")
+                .isTrue();
     }
 
-    @Then("the test case should fail with a bug report stating {string}")
-    public void the_test_case_should_fail_with_a_bug_report_stating(String bugReport) {
-        // Log the bug report for reference
-        System.out.println("Bug Report: " + bugReport);
-        throw new AssertionError("Bug detected: " + bugReport);
+
+    @Then("the Last Name field should accept the value {string}")
+    public void theLastNameFieldShouldAcceptTheValue(String expectedLastName) {
+        String enteredLastName = checkoutActions.getLastNameValue();
+        assertThat(enteredLastName)
+                .as("The Last Name field should accept the entered value")
+                .isEqualTo(expectedLastName);
     }
 
+    @When("the user enters {string} in the Last Name field")
+    public void theUserEntersInTheLastNameField(String lastName) {
+        checkoutActions.enterLastName(lastName);
+        waitFor(2);
+    }
     private void waitFor(int seconds) {
         try {
             Thread.sleep(seconds * 1000);
@@ -113,4 +113,5 @@ public class CheckoutYourInformationStepDefinitions {
             Thread.currentThread().interrupt();
         }
     }
+
 }
