@@ -3,35 +3,36 @@ package starter.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.var;
 import net.serenitybdd.annotations.Steps;
 import org.junit.Assert;
 import starter.actions.CartAction;
+
+import java.util.Map;
 
 public class CartStepDefinitions {
 
     @Steps
     CartAction cartAction;
 
-    @Given("the user navigates to the SauceDemo login page")
-    public void the_user_navigates_to_the_sauce_demo_login_page() {
-        cartAction.navigateToLoginPage();
-    }
+//    @Given("the user navigate to the SauceDemo login page")
+//    public void the_user_navigate_to_the_sauce_demo_login_page() {
+//        cartAction.navigateToLoginPage();
+//    }
 
-    @Given("the user enters {string} as the username")
-    public void the_user_enters_as_the_username(String username) {
-        cartAction.enterUsername(username);
-    }
-
-    @Given("the user enters {string} as the password")
-    public void the_user_enters_as_the_password(String password) {
-        cartAction.enterPassword(password);
-    }
-
-    @When("the user clicks on the {string} button")
-    public void the_user_clicks_on_the_button(String button) {
-        cartAction.clickButton(button);
-    }
+//    @Given("the user enters {string} as the username")
+//    public void the_user_enters_as_the_username(String username) {
+//        cartAction.enterUsername(username);
+//    }
+//
+//    @Given("the user enters {string} as the password")
+//    public void the_user_enters_as_the_password(String password) {
+//        cartAction.enterPassword(password);
+//    }
+//
+//    @When("the user clicks on the {string} button")
+//    public void the_user_click_on_the_button(String button) {
+//        cartAction.clickButton(button);
+//    }
 
     @When("I add the product at position {int} to the cart")
     public void iAddTheProductAtPositionToTheCart(int position) {
@@ -71,7 +72,7 @@ public class CartStepDefinitions {
 
     @When("I enter the following checkout information:")
     public void enterCheckoutInformation(io.cucumber.datatable.DataTable dataTable) {
-        var data = dataTable.asMaps().get(0);
+        Map<String, String> data = dataTable.asMaps().get(0);
         cartAction.fillCheckoutInformation(
                 data.get("First Name"),
                 data.get("Last Name"),
