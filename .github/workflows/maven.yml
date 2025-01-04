@@ -27,6 +27,7 @@ jobs:
       uses: browser-actions/setup-chrome@v1
       with:
         chrome-version: 'stable'
+        install-chromedriver: true
         
     - name: Build with Maven
       run: mvn -B verify --file pom.xml
